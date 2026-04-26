@@ -28,6 +28,7 @@ void Update() {
 
     IEnumerator EventStarter()
     {
+        //Event 0
         yield return new WaitForSeconds(2);
         fadeScreenIn.SetActive(false);
         charKasumi.SetActive(true);
@@ -43,14 +44,26 @@ void Update() {
         yield return new WaitForSeconds(1);
         yield return new WaitUntil(() => textLength == currentTextLength);
         yield return new WaitForSeconds(0.5f);
+        nextButton.SetActive(true);
+        eventPos = 1;
 
+    }
 
-
+    IEnumerator EventOne()
+    {
+        nextButton.SetActive(false);
         textBox.SetActive(true);
         yield return new WaitForSeconds(2);
         charHaruka.SetActive(true);
         girlGasp.Play();
     }
 
+    public void NextButton()
+    {
+        if (eventPos == 1)
+        {
+            StartCoroutine(EventOne());
+        }
+    }
 
 }
