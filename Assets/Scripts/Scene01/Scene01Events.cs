@@ -4,18 +4,20 @@ using UnityEngine;
 
 public class Scene01Events : MonoBehaviour
 {
-    public           GameObject  fadeScreenIn;
-    public           GameObject  charKasumi;
-    public           GameObject  charHaruka;
-    public           GameObject  textBox;
-    [SerializeField] AudioSource girlSigh;
-    [SerializeField] AudioSource girlGasp;
-    [SerializeField] string      textToSpeak;
-    [SerializeField] int         currentTextLength;
-    [SerializeField] int         textLength;
-    [SerializeField] GameObject  mainTextObject;
-    [SerializeField] GameObject nextButton;
-    [SerializeField] int eventPos = 0;
+    public            GameObject  fadeScreenIn;
+    public            GameObject  charKasumi;
+    public            GameObject  charHaruka;
+    public            GameObject  textBox;
+    [SerializeField]  AudioSource girlSigh;
+    [SerializeField]  AudioSource girlGasp;
+    [SerializeField]  string      textToSpeak;
+    [SerializeField]  int         currentTextLength;
+    [SerializeField]  int         textLength;
+    [SerializeField]  GameObject  mainTextObject;
+    [SerializeField]  GameObject  nextButton;
+    [SerializeField]  int         eventPos = 0;
+    [SerializeField]  GameObject  charName;
+    [SerializeField] private GameObject fadeOut;
 
 
 void Update() {
@@ -51,18 +53,92 @@ void Update() {
 
     IEnumerator EventOne()
     {
+        //event 1
         nextButton.SetActive(false);
-        textBox.SetActive(true);
-        yield return new WaitForSeconds(2);
         charHaruka.SetActive(true);
+        textBox.SetActive(true);
+        charName.GetComponent<TMPro.TMP_Text>().text = "Haruka";
+        textToSpeak                                  = "I was hiding over in the corner.";
+        textBox.GetComponent<TMPro.TMP_Text>() .text = textToSpeak;
+        currentTextLength                            = textToSpeak.Length;
+        TextCreator.runTextPrint                     = true;
+        yield return new WaitForSeconds(0.05f);
+        yield return new WaitForSeconds(1);
+        yield return new WaitUntil(() => textLength == currentTextLength);
+        yield return new WaitForSeconds(0.5f);
         girlGasp.Play();
+        nextButton.SetActive(true);
+        eventPos = 2;
     }
 
+    IEnumerator EventTwo()
+    {
+        //event 2
+        nextButton.SetActive(false);
+        charHaruka.SetActive(true);
+        textBox.SetActive(true);
+        charName.GetComponent<TMPro.TMP_Text>().text = "Haruka";
+        textToSpeak                                  = "Oh you startled me. I didn't expect you there.";
+        textBox.GetComponent<TMPro.TMP_Text>() .text = textToSpeak;
+        currentTextLength                            = textToSpeak.Length;
+        TextCreator.runTextPrint                     = true;
+        yield return new WaitForSeconds(0.05f);
+        yield return new WaitForSeconds(1);
+        yield return new WaitUntil(() => textLength == currentTextLength);
+        yield return new WaitForSeconds(0.5f);
+        nextButton.SetActive(true);
+        eventPos = 3;
+    }
+
+    IEnumerator EventThree()
+    {
+        //event 3
+        nextButton.SetActive(false);
+        charHaruka.SetActive(true);
+        textBox.SetActive(true);
+        charName.GetComponent<TMPro.TMP_Text>().text = "Haruka";
+        textToSpeak                                  = "I'm sorry I didn't mean to... Let's go to the park and look for Akane";
+        textBox.GetComponent<TMPro.TMP_Text>() .text = textToSpeak;
+        currentTextLength                            = textToSpeak.Length;
+        TextCreator.runTextPrint                     = true;
+        yield return new WaitForSeconds(0.05f);
+        yield return new WaitForSeconds(1);
+        yield return new WaitUntil(() => textLength == currentTextLength);
+        yield return new WaitForSeconds(0.5f);
+        nextButton.SetActive(true);
+        eventPos = 4;
+    }
+
+    IEnumerator EventFour()
+    {
+        //event 4
+        nextButton.SetActive(false);
+        charHaruka.SetActive(true);
+        textBox.SetActive(true);
+        fadeOut.SetActive(true);
+        yield return new WaitForSeconds(2);
+        eventPos = 4;
+    }
     public void NextButton()
     {
         if (eventPos == 1)
         {
             StartCoroutine(EventOne());
+        }
+
+        if (eventPos == 2)
+        {
+            StartCoroutine(EventTwo());
+        }
+
+        if (eventPos == 3)
+        {
+            StartCoroutine(EventThree());
+        }
+
+        if (eventPos == 4)
+        {
+            StartCoroutine(EventFour());
         }
     }
 
