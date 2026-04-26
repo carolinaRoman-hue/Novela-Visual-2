@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Scene01Events : MonoBehaviour
 {
@@ -118,7 +119,9 @@ void Update() {
         fadeOut.SetActive(true);
         yield return new WaitForSeconds(2);
         eventPos = 4;
+        SceneManager.LoadScene(1);
     }
+
     public void NextButton()
     {
         if (eventPos == 1)
