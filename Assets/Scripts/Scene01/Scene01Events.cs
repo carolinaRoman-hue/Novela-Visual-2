@@ -4,22 +4,21 @@ using UnityEngine;
 
 public class Scene01Events : MonoBehaviour
 {
-    public GameObject fadeScreenIn;
-    public GameObject charKasumi;
-    public GameObject charHaruka;
-    public GameObject textBox;
-
+    public           GameObject  fadeScreenIn;
+    public           GameObject  charKasumi;
+    public           GameObject  charHaruka;
+    public           GameObject  textBox;
     [SerializeField] AudioSource girlSigh;
     [SerializeField] AudioSource girlGasp;
+    [SerializeField] string      textToSpeak;
+    [SerializeField] int         currentTextLength;
+    [SerializeField] int         textLength;
+    [SerializeField] GameObject  mainTextObject;
+    [SerializeField] GameObject nextButton;
+    [SerializeField] int eventPos = 0;
 
 
-    [SerializeField] string textToSpeak;
-    [SerializeField] int currentTextLength;
-    [SerializeField] int textLength;
-    [SerializeField] GameObject mainTextObject;
-
-
-    void Update() {
+void Update() {
         textLength = TextCreator.charCount;
     }
 
@@ -35,7 +34,7 @@ public class Scene01Events : MonoBehaviour
         yield return new WaitForSeconds(2);
         //this is where pur text function will go in future tutorial
         mainTextObject.SetActive(true);
-        textToSpeak                                  = "I wonder where Haruka has go to. She was supposed to be here.";
+        textToSpeak                                  = "I wonder where Haruka has got to. She was supposed to be here.";
         textBox.GetComponent<TMPro.TMP_Text>() .text = textToSpeak;
         currentTextLength                            = textToSpeak.Length;
         TextCreator.runTextPrint                     = true;
